@@ -2,6 +2,11 @@
 
 This repository contains the implementation of the **STAAR (Variant Set Test for Association using Annotation information)** protocol. The pipeline manages data conversion, variant standardization, functional annotation, and gene-centric association analysis.
 
+## 📝 Background & Reproducibility
+The protocol provided here is designed to reproduce the results presented in the following study:
+> **"Large Impact of Genetic Data Processing Steps on Stability and Reproducibility of Set-Based Analyses in Genome-Wide Association Studies"** > [bioRxiv (2025)](https://www.biorxiv.org/content/10.1101/2025.07.21.665850v1)
+
+While based on the original STAAR framework, this version includes **enhanced features** designed to improve data stability and consistency across different genomic sources.
 ---
 
 ## 🛠 Pipeline Workflow
@@ -28,7 +33,7 @@ STAAR requires data in the **GDS (Genomic Data Structure)** format. This script 
 ### Step 1: Variant Standardization
 `1Varinfo_gds.R`  
 Extracts variant metadata (CHR-POS-REF-ALT) into a CSV. 
-* Includes a built-in algorithm to standardize **REF** and **ALT** formats and update **POS** (position) accordingly. 
+* We added a custom algorithm to standardize the format of **REF** and **ALT** alleles and update the **POS** accordingly. 
 * This ensures consistency across disparate data sources and prevents mismatches during annotation.
 
 ### Step 2: Annotation
