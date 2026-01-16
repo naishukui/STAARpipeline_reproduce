@@ -1,5 +1,5 @@
-# STAARpipeline-Tutorial
-This is a tutorial for (1) automatically functionally annotating the variants of whole-genome/whole-exome sequencing (WGS/WES) studies and integrating the functional annotations with the genotype data using **FAVORannotator** and (2) performing single-/multi-trait association analysis of WGS/WES studies, summarizing and visualization results using **STAARpipeline** and **STAARpipelineSummary**. The software prerequisites, dependencies and installation can be found in <a href="https://github.com/xihaoli/STAARpipeline">**STAARpipeline**</a> and <a href="https://github.com/xihaoli/STAARpipelineSummary">**STAARpipelineSummary**</a> packages.
+# STAARpipeline Protocal
+This is a tutorial for (1) automatically functionally annotating the variants of whole-genome/whole-exome sequencing (WGS/WES) studies and integrating the functional annotations with the genotype data using **FAVORannotator** and (2) performing association analysis of WGS/WES studies, summarizing and visualization results using **STAARpipeline** and **STAARpipelineSummary**. The software prerequisites, dependencies and installation can be found in <a href="https://github.com/xihaoli/STAARpipeline">**STAARpipeline**</a> and <a href="https://github.com/xihaoli/STAARpipelineSummary">**STAARpipelineSummary**</a> packages.
 
 **FAVORannotator**, **STAARpipeline** and **STAARpipelineSummary** are implemented as a collection of apps for cloud-based platforms. Please see the following apps
 
@@ -64,7 +64,7 @@ R package **FastSparseGRM** provides functions and a pipeline to efficiently cal
 * `Annotation_name_catalog.Rdata`: a data frame containing the annotation name and the corresponding channel name in the aGDS file. Alternatively, one can skip this part in the R script by providing `Annotation_name_catalog.csv` with the same information. An example of `Annotation_name_catalog.csv` can be found <a href="https://github.com/xihaoli/STAARpipeline-Tutorial/blob/main/FAVORannotator_csv/Annotation_name_catalog.csv">here</a>. <br>
 * `jobs_num.Rdata`: a data frame containing the number of jobs for association analysis, including individual analysis, sliding window analysis and dynamic window analysis (SCANG-STAAR).
 
-### Step 1: Fit STAAR or MultiSTAAR null model
+### Step 1: Fit STAAR null model
 #### Script: <a href="STAARpipeline_Null_Model.r">**STAARpipeline_Null_Model.r**</a> or <a href="STAARpipeline_Null_Model_GENESIS.r">**STAARpipeline_Null_Model_GENESIS.r**</a> or <a href="STAARpipeline_Null_Model_Multi.r">**STAARpipeline_Null_Model_Multi.r**</a>
 * `STAARpipeline_Null_Model.r` fits the STAAR null model using the STAARpipeline package. <br>
 * `STAARpipeline_Null_Model_GENESIS.r` fits the null model using the GENESIS package and convert it to the STAAR null model using the STAARpipeline package. <br>
