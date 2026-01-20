@@ -86,7 +86,6 @@ for **Setting 6**, delete the two categories for non-frameshift INDELS:
   (GENCODE.Category=="splicing")|(GENCODE.Category=="exonic;splicing")|(GENCODE.Category=="ncRNA_splicing")|(GENCODE.Category=="ncRNA_exonic;splicing")|
   (GENCODE.EXONIC.Category=="nonsynonymous SNV")#|(GENCODE.EXONIC.Category=="synonymous SNV")
 ```
-3.  **Execution:** Use `5pipeline_coding_combine_long.R` for any jobs that exceed standard cluster walltime limits.
    
 ### Step 6: Summary and Visualization
 `summary_gene_centric_coding.R`  
