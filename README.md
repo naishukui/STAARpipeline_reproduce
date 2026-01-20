@@ -19,7 +19,7 @@ While based on the original STAAR framework, this version includes **enhanced fe
 | **Step 3** | `3gds2agds.R` | Integrate annotations into GDS (create aGDS). |
 | **Step 4** | `4preStep.R` | Calculate job scaling based on variant density. |
 | **Step 5** | `5pipeline_coding_combine.R` | Perform core STAAR association analysis. |
-| **Step 6** | `summary_gene_centric_coding.R` | Result summarization and Manhattan plotting. |
+| **Step 6** | `6summary_gene_centric_coding.R` | Result summarization and Manhattan plotting. |
 
 ---
 
@@ -78,7 +78,7 @@ This is the core analytical step. To reproduce the specific results from the pap
   (GENCODE.EXONIC.Category=="nonsynonymous SNV")#|(GENCODE.EXONIC.Category=="synonymous SNV")
 ```
 
-for **Setting 6**, delete the two categories for non-frameshift INDELS the logic:
+for **Setting 6**, delete the two categories for non-frameshift INDELS:
  ```r
   coding <- (GENCODE.EXONIC.Category=="stopgain")|(GENCODE.EXONIC.Category=="stoploss")|
   (GENCODE.EXONIC.Category=="frameshift deletion")|(GENCODE.EXONIC.Category=="frameshift insertion")|
