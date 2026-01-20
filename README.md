@@ -78,7 +78,7 @@ This is the core analytical step. To reproduce the specific results from the pap
   (GENCODE.EXONIC.Category=="nonsynonymous SNV")#|(GENCODE.EXONIC.Category=="synonymous SNV")
 ```
 
-for **Setting 6**, delete the two categories for non-frameship INDELS the logic:
+for **Setting 6**, delete the two categories for non-frameshift INDELS the logic:
  ```r
   coding <- (GENCODE.EXONIC.Category=="stopgain")|(GENCODE.EXONIC.Category=="stoploss")|
   (GENCODE.EXONIC.Category=="frameshift deletion")|(GENCODE.EXONIC.Category=="frameshift insertion")|
