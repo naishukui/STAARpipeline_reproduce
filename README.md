@@ -70,13 +70,13 @@ This is the core analytical step. To reproduce the specific results from the pap
 #### 🛠 How to Modify:
 1.  **MAF & Variant Type:** Open `5pipeline_coding_combine.R` and update the `rare_maf_cutoff` and `variant_type` variables at the end of the script.
 2.  **Coding Categories:** Open `coding_combine.R` and adjust the logical filters. For example, for **Setting 1**, ensure the logic follows:
-    ```R
+ ```r
   coding <- (GENCODE.EXONIC.Category=="stopgain")|(GENCODE.EXONIC.Category=="stoploss")|
   (GENCODE.EXONIC.Category=="frameshift deletion")|(GENCODE.EXONIC.Category=="frameshift insertion")|
   (GENCODE.EXONIC.Category=="nonframeshift deletion")|(GENCODE.EXONIC.Category=="nonframeshift insertion")|
   (GENCODE.Category=="splicing")|(GENCODE.Category=="exonic;splicing")|(GENCODE.Category=="ncRNA_splicing")|(GENCODE.Category=="ncRNA_exonic;splicing")|
   (GENCODE.EXONIC.Category=="nonsynonymous SNV")#|(GENCODE.EXONIC.Category=="synonymous SNV")
-
+```
 3.  **Execution:** Use `5pipeline_coding_combine_long.R` for any jobs that exceed standard cluster walltime limits.
    
 ### Step 6: Summary and Visualization
