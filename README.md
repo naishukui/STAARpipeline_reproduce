@@ -77,7 +77,11 @@ This is the core analytical step. To reproduce the specific results from the pap
   (GENCODE.Category=="splicing")|(GENCODE.Category=="exonic;splicing")|(GENCODE.Category=="ncRNA_splicing")|(GENCODE.Category=="ncRNA_exonic;splicing")|
   (GENCODE.EXONIC.Category=="nonsynonymous SNV")#|(GENCODE.EXONIC.Category=="synonymous SNV")
     ```
-
+2.  **Coding Categories:** Open `coding_combine.R` and adjust the logical filters. For example, for **Setting 1**, ensure the logic follows:
+    ```R
+    lof.in.coding <- (GENCODE.EXONIC.Category == "frameshift deletion") | 
+                     (GENCODE.EXONIC.Category == "frameshift insertion")
+    ```
     
 3.  **Execution:** Use `5pipeline_coding_combine_long.R` for any jobs that exceed standard cluster walltime limits.
    
