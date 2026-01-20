@@ -56,9 +56,6 @@ The core analytical engine of the pipeline.
 * **New Feature:** We have added a function to combine different coding categories; refer to `coding_combine.R` for specific logic.
 This is the core analytical step. To reproduce the specific results from the paper, you must adjust the script parameters according to the settings below.
 
-####  Settings 
-Modify the variables in `5pipeline_coding_combine.R` (or `_long.R`) and the coding logic in `coding_combine.R` as follows:
-
 | Setting | Raw Data Type | `rare_maf_cutoff` | `variant_type` | Coding Categories (in `coding_combine.R`) |
 | :--- | :--- | :--- | :--- | :--- |
 | **Setting 1** | Splitted Multi-Allelic | `0.005` | `"variant"` | Original + Non-frameshift INDELs |
@@ -80,14 +77,6 @@ Modify the variables in `5pipeline_coding_combine.R` (or `_long.R`) and the codi
   (GENCODE.Category=="splicing")|(GENCODE.Category=="exonic;splicing")|(GENCODE.Category=="ncRNA_splicing")|(GENCODE.Category=="ncRNA_exonic;splicing")|
   (GENCODE.EXONIC.Category=="nonsynonymous SNV")#|(GENCODE.EXONIC.Category=="synonymous SNV")
     ```
-    For **Setting 6** , the category changes to 
-    ```R
-    coding <- (GENCODE.EXONIC.Category=="stopgain")|(GENCODE.EXONIC.Category=="stoploss")|
-  (GENCODE.EXONIC.Category=="frameshift deletion")|(GENCODE.EXONIC.Category=="frameshift insertion")|
-  #(GENCODE.EXONIC.Category=="nonframeshift deletion")|(GENCODE.EXONIC.Category=="nonframeshift insertion")|
-  (GENCODE.Category=="splicing")|(GENCODE.Category=="exonic;splicing")|(GENCODE.Category=="ncRNA_splicing")|(GENCODE.Category=="ncRNA_exonic;splicing")|
-  (GENCODE.EXONIC.Category=="nonsynonymous SNV")#|(GENCODE.EXONIC.Category=="synonymous SNV")
-  ```
 
     
 3.  **Execution:** Use `5pipeline_coding_combine_long.R` for any jobs that exceed standard cluster walltime limits.
