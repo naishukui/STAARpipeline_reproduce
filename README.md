@@ -54,9 +54,34 @@ The core analytical engine of the pipeline.
 * **Selection:** Use `_long.R` for high-complexity jobs requiring extended processing time.
 * **Configurations:** Users can adjust Minor Allele Frequency (MAF) cutoffs, functional categories, and coding categories.
 * **New Feature:** We have added a function to combine different coding categories; refer to `coding_combine.R` for specific logic.
+This is the core analytical step. To reproduce the specific results from the paper, you must adjust the script parameters according to the settings below.
 
+#### 📊 Analysis Settings Matrix
+Modify the variables in `5pipeline_coding_combine.R` (or `_long.R`) and the coding logic in `coding_combine.R` as follows:
+
+| Setting | Raw Data Type | `rare_maf_cutoff` | `variant_type` | Coding Categories (in `coding_combine.R`) |
+| :--- | :--- | :--- | :--- | :--- |
+| **Setting 1** | Splitted Multi-Allelic | `0.005` | `"variant"` | **LOF Only:** `frameshift deletion` OR `frameshift insertion` |
+| **Setting 2** | Splitted Multi-Allelic | `0.005` | `"SNV"` | Original + Frameshift INDELs |
+| **Setting 3** | Splitted Multi-Allelic | `0.01` | `"variant"` | Original + Frameshift INDELs |
+| **Setting 4** | Splitted Multi-Allelic | `0.005` | `"variant"` | Original |
+| **Setting 5** | Splitted Multi-Allelic | `0.01` | `"SNV"` | Original |
+| **Setting 6** | Merged Multi-Allelic* | `0.01` | `"SNV"` | Original |
+
+> **Note on Setting 6:** This requires the raw data to be processed such that multiple alternative alleles are merged into a single composite alternative allele before running the pipeline.
+
+#### 🛠 How to Modify:
+1.  **MAF & Variant Type:** Open `5pipeline_coding_combine.R` and update the `rare_maf_cutoff` and `variant_type` variables at the top of the script.
+2.  **Coding Categories:** Open `coding_combine.R` and adjust the logical filters. For example, for **Setting 1**, ensure the logic follows:
+    ```R
+    lof.in.coding <- (GENCODE.EXONIC.Category == "frameshift deletion") | 
+                     (GENCODE.EXONIC.Category == "frameshift insertion")
+    ```
+3.  **Execution:** Use `5pipeline_coding_combine_long.R` for any jobs that exceed standard cluster walltime limits.
+   
 ### Step 6: Summary and Visualization
 `summary_gene_centric_coding.R`  
 Generates the final summary of the gene-centric analysis for coding regions. This script automatically produces a **Manhattan plot** of gene-based p-values for visual interpretation.
 
 ---
+
