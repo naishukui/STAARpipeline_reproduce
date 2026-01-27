@@ -26,30 +26,30 @@ While based on the original STAAR framework, this version includes **enhanced fe
 ## 📖 Step-by-Step Instructions
 
 ### Step 0: VCF to GDS Conversion
-`0vcf2gds.R`  
+`vcf2gds.R`  
 STAAR requires data in the **GDS (Genomic Data Structure)** format. This script handles the conversion from VCF.
 > **Note:** If your data is already in GDS format, you may skip this step.
 
 ### Step 1: Variant Standardization
-`1Varinfo_gds.R`  
+`Varinfo_gds.R`  
 Extracts variant metadata (CHR-POS-REF-ALT) into a CSV. 
 * We added a custom algorithm to standardize the format of **REF** and **ALT** alleles and update the **POS** accordingly. 
 * This ensures consistency across disparate data sources and prevents mismatches during annotation.
 
 ### Step 2: Annotation
-`2Annotate.R`  
+`Annotate.R`  
 Annotates the variant information from Step 1 using the **FAVOR** database. The output is saved as a CSV file containing functional scores and categories.
 
 ### Step 3: Integrate Annotations (aGDS)
-`3gds2agds.R`  
+`gds2agds.R`  
 Appends the annotation data back into the original GDS file. This "Annotated GDS" (aGDS) is the primary input for the STAAR statistical tests.
 
 ### Step 4: Job Preparation
-`4preStep.R`  
+`preStep.R`  
 Analyzes the total variant count in the aGDS file to calculate the required number of parallel jobs for high-performance computing (HPC) efficiency.
 
 ### Step 5: STAAR Association Analysis
-`5pipeline_coding_combine.R` | `5pipeline_coding_combine_long.R`  
+`pipeline_coding_combine.R` | `pipeline_coding_combine_long.R`  
 The core analytical engine of the pipeline.
 * **Selection:** Use `_long.R` for high-complexity jobs requiring extended processing time.
 * **Configurations:** Users can adjust Minor Allele Frequency (MAF) cutoffs, functional categories, and coding categories.
@@ -58,17 +58,17 @@ This is the core analytical step. To reproduce the specific results from the pap
 
 | Setting | Raw Data Type | `rare_maf_cutoff` | `variant_type` | Coding Categories (in `coding_combine.R`) |
 | :--- | :--- | :--- | :--- | :--- |
-| **Setting 1** | Splitted Multi-Allelic | `0.005` | `"variant"` | Original + Non-frameshift INDELs |
-| **Setting 2** | Splitted Multi-Allelic | `0.005` | `"SNV"` | Original + Non-frameshift INDELs |
-| **Setting 3** | Splitted Multi-Allelic | `0.01` | `"variant"` | Original + Non-frameshift INDELs |
-| **Setting 4** | Splitted Multi-Allelic | `0.005` | `"variant"` | Original |
-| **Setting 5** | Splitted Multi-Allelic | `0.01` | `"SNV"` | Original |
-| **Setting 6** | Merged Multi-Allelic* | `0.01` | `"SNV"` | Original |
+| **1** | Splitted Multi-Allelic | `0.005` | `"variant"` | Original + Non-frameshift INDELs |
+| **2** | Splitted Multi-Allelic | `0.005` | `"SNV"` | Original + Non-frameshift INDELs |
+| **3** | Splitted Multi-Allelic | `0.01` | `"variant"` | Original + Non-frameshift INDELs |
+| **4** | Splitted Multi-Allelic | `0.005` | `"variant"` | Original |
+| **5** | Splitted Multi-Allelic | `0.01` | `"SNV"` | Original |
+| **6** | Merged Multi-Allelic* | `0.01` | `"SNV"` | Original |
 
 > **Note on Setting 6:** This requires the raw data to be processed such that multiple alternative alleles are merged into a single composite alternative allele before running the pipeline.
 
 #### 🛠 How to Modify:
-1.  **MAF & Variant Type:** Open `5pipeline_coding_combine.R` and update the `rare_maf_cutoff` and `variant_type` variables at the end of the script.
+1.  **MAF & Variant Type:** Open `pipeline_coding_combine.R` and update the `rare_maf_cutoff` and `variant_type` variables at the end of the script.
 2.  **Coding Categories:** Open `coding_combine.R` and adjust the logical filters. For example, for **Setting 1**, ensure the logic follows:
  ```r
   coding <- (GENCODE.EXONIC.Category=="stopgain")|(GENCODE.EXONIC.Category=="stoploss")|
